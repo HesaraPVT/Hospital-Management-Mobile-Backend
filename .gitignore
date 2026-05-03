@@ -1,0 +1,55 @@
+# Environment variables
+.env
+.env.example
+.env.local
+.env.*.local
+
+# Dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+logs/
+*.log
+debug.log
+
+# Build & dist
+build/
+dist/
+.next/
+
+# Uploads
+uploads/
+tmp/
+
+# Generated files (development only)
+hospital-schema-diagram.html
+schemas.json
+test-connection.js
+visualizeSchemas.js
+generate-schema-diagram.js
+
+# Cache
+.cache/
+.eslintcache
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Testing
+coverage/
+.nyc_output/
+
+# Lock files (optional - uncomment if using npm/yarn in production)
+# package-lock.json
+# yarn.lock
