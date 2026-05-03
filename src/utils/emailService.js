@@ -1,13 +1,19 @@
 const nodemailer = require('nodemailer');
 
-// Create a transporter using Gmail
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD,
-  },
-});
+// Lazy-init transporter — reads env vars at call time (important for Render/cloud deploys)
+const createTransporter = () =>
+  nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false, // STARTTLS
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASSWORD,
+    },
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 15000,
+  });
 
 // Send password reset email
 const sendResetEmail = async (email, resetLink) => {
@@ -65,6 +71,7 @@ const sendResetEmail = async (email, resetLink) => {
 
   try {
     console.log(`📧 Attempting to send email to: ${email}`);
+    const transporter = createTransporter();
     await transporter.sendMail(mailOptions);
     console.log(`✅ Email sent successfully to ${email}`);
     return { success: true, message: 'Email sent successfully' };
