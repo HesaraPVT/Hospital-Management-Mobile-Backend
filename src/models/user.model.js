@@ -26,6 +26,12 @@ const userSchema = new mongoose.Schema(
         address: {
             type: String
         },
+        dateOfBirth: {
+            type: String
+        },
+        age: {
+            type: Number
+        },
         profileImage: {
             type: String
         },
